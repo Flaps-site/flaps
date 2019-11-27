@@ -98,6 +98,26 @@
                     });
 
                 saveAs(blob, 'flaps_code.js');
+            },
+            generateAndRunCode() {
+                const code = Blockly.JavaScript.workspaceToCode(workspace);
+
+                if (code.trim() === '') {
+                    this.$Modal.warning({
+                        title: '生成代码失败',
+                        content: '生成代码失败，请书写一些代码。如果已经存在代码，请检查对应代码的参数是否填写完整。'
+                    });
+                    return;
+                }
+
+                try {
+                    new Function(code)();
+                } catch (e) {
+                    this.$Modal.error({
+                        title: '代码运行失败',
+                        content: '生成代码失败，报错：' + e
+                    });
+                }
             }
         }
     })

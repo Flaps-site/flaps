@@ -19,7 +19,7 @@ Blockly.JavaScript['data_typeof'] = function(block) {
         return ['', Blockly.JavaScript.ORDER_ATOMIC]
     }
 
-    const code = 'typeof ' + text;
+    const code = '(function(){ if(!Array.isArray(' + text + ')) { return typeof ' + text + ' } else { return "list" }})()';
 
     return [code, Blockly.JavaScript.ORDER_TYPEOF];
 }
