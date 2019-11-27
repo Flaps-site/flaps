@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="//unpkg.com/view-design/dist/styles/iview.css">
+    <link rel="stylesheet" href="css/index.css">
+    <title>Flaps - 在线 JavaScript 积木化编程</title>
+</head>
+
+<body>
+    <header>
+        <h1>
+            <embed height="40px" src="img/logo.svg" type="image/svg+xml">
+            <a style="color: black;" href="index.html">
+                <span style="position: relative; bottom: 10px;">Flaps</span>
+            </a>
+        </h1>
+        <div id="header-right-btnGroup">
+            <i-button @click="generateCode">生成 JS 代码</i-button>
+            <i-button @click="downloadGenerateCode" type="primary">下载 JS 代码</i-button>
+        </div>
+    </header>
+
+    <main>
+        <div id="tools-area">
+            <upload :before-upload="importBlockXMLFile" action="//jsonplaceholder.typicode.com/posts/">
+                <i-button icon="ios-cloud-upload-outline">导入块文件</i-button>
+            </upload>
+            <i-button style="margin-top: 4px;" icon="ios-cloud-download-outline" @click="exportBlockXMLFile">导出块文件</i-button>
+            <br>
+            <br>
+            <br>
+            <i-button @click="clearWorkspace" id="clear-workspace-btn">清空工作空间</i-button>
+            <modal v-model="clearModal" title="你确定要清空工作空间吗？" @on-ok="clearModalOk">
+                <p style="color: red">清空工作空间后将无法恢复！请谨慎操作！</p>
+            </modal>
+        </div>
+
+        <div id="blockly-area"></div>
+        <div id="blockly-div"></div>
+        <xml id="toolbox">
+            <category name="逻辑" colour="210">
+                <block type="logic_boolean"></block>
+                <block type="controls_if"></block>
+                <block type="controls_ifelse"></block>
+                <block type="logic_compare"></block>
+                <block type="logic_operation"></block>
+                <block type="logic_negate"></block>
+                <block type="logic_null"></block>
+                <block type="logic_interval"></block>
+                <block type="logic_interval_clear"></block>
+                <block type="logic_timeout"></block>
+                <block type="logic_timeout_clear"></block>
+            </category>
+            <category name="动作" colour="180">
+                <block type="action_alert"></block>
+                <block type="action_prompt"></block>
+                <block type="action_confirm"></block>
+                <block type="action_getStyle"></block>
+                <block type="action_getAttr"></block>
+                <block type="action_getInner"></block>
+                <block type="action_setStyle"></block>
+                <block type="action_setAttr"></block>
+                <block type="action_setInner"></block>
+            </category>
+            <category name="循环" colour="120">
+                <block type="controls_repeat_ext"></block>
+                <block type="controls_repeat"></block>
+                <block type="controls_whileUntil"></block>
+                <block type="controls_for"></block>
+                <block type="controls_forEach"></block>
+                <block type="controls_flow_statements"></block>
+            </category>
+            <category name="文本" colour="160">
+                <block type="text"></block>
+                <block type="text_multiline"></block>
+                <block type="text_join"></block>
+                <block type="text_append"></block>
+                <block type="text_length"></block>
+                <block type="text_isEmpty"></block>
+                <block type="text_indexOf"></block>
+                <block type="text_charAt"></block>
+            </category>
+            <category name="数学" colour="230">
+                <block type="math_number"></block>
+                <block type="math_arithmetic"></block>
+                <block type="math_single"></block>
+                <block type="math_trig"></block>
+                <block type="math_constant"></block>
+                <block type="math_number_property"></block>
+                <block type="math_round"></block>
+                <block type="math_on_list"></block>
+                <block type="math_modulo"></block>
+                <block type="math_constrain"></block>
+                <block type="math_random_int"></block>
+                <block type="math_random_float"></block>
+                <block type="math_atan2"></block>
+            </category>
+            <category name="数据" colour="40">
+                <block type="data_to_number"></block>
+                <block type="data_to_boolean"></block>
+                <block type="data_typeof"></block>
+                <block type="data_object_generator"></block>
+                <block type="data_object_add_member"></block>
+                <block type="data_object_get_member"></block>
+                <block type="data_object_get_all_member"></block>
+                <block type="lists_create_empty"></block>
+                <block type="lists_repeat"></block>
+                <block type="lists_reverse"></block>
+                <block type="lists_isEmpty"></block>
+                <block type="lists_length"></block>
+                <block type="lists_indexOf"></block>
+                <block type="lists_getIndex"></block>
+                <block type="lists_setIndex"></block>
+                <block type="lists_getSublist"></block>
+                <block type="lists_sort"></block>
+                <block type="lists_split"></block>
+            </category>
+            <category name="颜色" colour="20">
+                <block type="colour_picker"></block>
+                <block type="colour_random"></block>
+                <block type="colour_rgb"></block>
+                <block type="colour_blend"></block>
+            </category>
+            <category name="变量" colour="330" custom="VARIABLE"></category>
+            <category name="函数" colour="290" custom="PROCEDURE"></category>
+        </xml>
+    </main>
+
+    <script src="js/lib/vue.min.js"></script>
+    <script src="js/lib/fileSaver.js"></script>
+    <script src="//unpkg.com/view-design/dist/iview.min.js"></script>
+    <script src="js/blockly/blockly_compressed.js"></script>
+    <script src="js/blockly/javascript_compressed.js"></script>
+    <script src="js/blockly/generators/javascript/action.js"></script>
+    <script src="js/blockly/generators/javascript/logic_new.js"></script>
+    <script src="js/blockly/generators/javascript/data.js"></script>
+    <script src="js/blockly/blocks_compressed.js"></script>
+    <script src="js/blockly/msg/js/zh-hans.js"></script>
+    <script src="js/blockly/blocks/action.js"></script>
+    <script src="js/blockly/blocks/logic_new.js"></script>
+    <script src="js/blockly/blocks/data.js"></script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>
