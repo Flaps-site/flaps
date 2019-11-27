@@ -1,6 +1,6 @@
 (function(window, document) {
 
-    console.info('Flaps v1.0.0, Powered by Bill Dong.');
+    console.info('Flaps - Powered by Bill Dong.');
 
     const blocklyArea = document.getElementById('blockly-area'),
         blocklyDiv = document.getElementById('blockly-div'),
@@ -87,7 +87,7 @@
 
                 this.$Modal.success({
                     title: '成功生成 JS 代码',
-                    content: code,
+                    content: codeToText(code),
                     scrollable: true
                 });
             },
