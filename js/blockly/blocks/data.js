@@ -42,6 +42,20 @@ Blockly.Blocks['data_typeof'] = {
     }
 }
 
+Blockly.Blocks['data_isnan'] = {
+    init: function() {
+        this.appendValueInput("VALUE")
+            .setCheck(null)
+            .setAlign(Blockly.ALIGN_CENTRE)
+            .appendField("是否为 NaN");
+        this.setInputsInline(true);
+        this.setOutput(true, 'Boolean');
+        this.setColour(40);
+        this.setTooltip('判断数据是否是 NaN（Not a Number）');
+        this.setHelpUrl('https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Number/isNaN');
+    }
+}
+
 Blockly.Blocks['data_object_generator'] = {
     init: function() {
         this.appendDummyInput()

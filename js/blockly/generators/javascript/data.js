@@ -24,6 +24,18 @@ Blockly.JavaScript['data_typeof'] = function(block) {
     return [code, Blockly.JavaScript.ORDER_TYPEOF];
 }
 
+Blockly.JavaScript['data_isnan'] = function(block) {
+    const text = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
+
+    if (text.length === 0) {
+        return ['', Blockly.JavaScript.ORDER_ATOMIC]
+    }
+
+    const code = 'Number.isNaN(' + text + ')';
+
+    return [code, Blockly.JavaScript.ORDER_ATOMIC];
+}
+
 Blockly.JavaScript['data_object_generator'] = function(block) {
     const code = '{}';
     return [code, Blockly.JavaScript.ORDER_NEW];
@@ -62,7 +74,7 @@ Blockly.JavaScript['data_object_get_all_member'] = function(block) {
     }
 
     const code = 'Object.keys(' + obj + ')';
-    return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
+    return [code, Blockly.JavaScript.ORDER_ATOMIC];
 }
 
 Blockly.JavaScript['data_date_get_now_time_number'] = function(block) {
