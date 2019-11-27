@@ -13,8 +13,14 @@ Blockly.JavaScript['data_to_boolean'] = function(block) {
 }
 
 Blockly.JavaScript['data_typeof'] = function(block) {
-    const text = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC),
-        code = 'typeof ' + text;
+    const text = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
+
+    if (text.length === 0) {
+        return ['', Blockly.JavaScript.ORDER_ATOMIC]
+    }
+
+    const code = 'typeof ' + text;
+
     return [code, Blockly.JavaScript.ORDER_TYPEOF];
 }
 
