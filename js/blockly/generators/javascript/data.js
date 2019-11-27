@@ -58,3 +58,16 @@ Blockly.JavaScript['data_object_get_all_member'] = function(block) {
     const code = 'Object.keys(' + obj + ')';
     return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 }
+
+Blockly.JavaScript['data_date_get_now_time_number'] = function(block) {
+    const code = '(new Date().getTime())';
+    return [code, Blockly.JavaScript.ORDER_ATOMIC];
+}
+
+Blockly.JavaScript['data_date_get_time'] = function(block) {
+    const dateNum = Blockly.JavaScript.valueToCode(block, 'NUM', Blockly.JavaScript.ORDER_ATOMIC),
+        type = block.getFieldValue('TYPE');
+
+    const code = '(new Date(' + dateNum + ').' + type + ')';
+    return [code, Blockly.JavaScript.ORDER_ATOMIC];
+}

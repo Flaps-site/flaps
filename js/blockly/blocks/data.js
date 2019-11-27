@@ -106,3 +106,41 @@ Blockly.Blocks['data_object_get_all_member'] = {
         this.setHelpUrl('https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object');
     }
 }
+
+Blockly.Blocks['data_date_get_now_time_number'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField('获取当前时间戳数字');
+        this.setColour(80);
+        this.setOutput(true, 'Number');
+        this.setTooltip('获取从1970年到现在为止的时间戳数字。');
+        this.setHelpUrl('https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date');
+    }
+}
+
+Blockly.Blocks['data_date_get_time'] = {
+    init: function() {
+        this.appendValueInput("NUM")
+            .setCheck('Number')
+            .appendField('使用');
+        this.appendDummyInput()
+            .appendField('获取')
+            .appendField(new Blockly.FieldDropdown([
+                ["年", "getFullYear()"],
+                ["月", "getMonth() + 1"],
+                ["日", "getDate()"],
+                ["时", "getHours()"],
+                ["分", "getMinutes()"],
+                ["秒", "getSeconds() + 1"],
+                ["毫秒", "getMilliseconds() + 1"],
+                ["星期", "getDay()"]
+            ]), "TYPE");
+        this.appendDummyInput()
+            .appendField('信息');
+        this.setInputsInline(true);
+        this.setColour(80);
+        this.setOutput(true, 'Number');
+        this.setTooltip('使用时间戳数字获取一些时间信息（返回数字）。');
+        this.setHelpUrl('https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date');
+    }
+}
