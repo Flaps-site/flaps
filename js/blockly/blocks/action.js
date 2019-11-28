@@ -113,7 +113,7 @@ Blockly.Blocks['action_getInner'] = {
         this.setOutput(true, "String");
         this.setInputsInline(true);
         this.setColour(180);
-        this.setTooltip('获取页面元素属性。');
+        this.setTooltip('获取页面元素内部。');
         this.setHelpUrl('https://developer.mozilla.org/zh-CN/docs/Web/API/Document/querySelector');
     }
 }
