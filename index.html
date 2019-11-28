@@ -18,6 +18,11 @@
 
 <body>
     <header>
+        <div id="browser-language-change-modal">
+            <modal v-model="isShow" title="Switch Language" @on-ok="changeLang">
+                <p>Your browser language seems to be English. Do you want to switch to the English website?</p>
+            </modal>
+        </div>
         <h1>
             <embed height="40px" src="img/logo.svg" type="image/svg+xml">
             <a style="color: black;" href="index.html">

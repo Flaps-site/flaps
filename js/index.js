@@ -1,5 +1,7 @@
 (function(window, document) {
 
+    browserLanguageCheck();
+
     console.info('Flaps - Powered by Bill Dong.');
 
     const blocklyArea = document.getElementById('blockly-area'),
