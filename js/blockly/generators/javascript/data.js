@@ -1,3 +1,7 @@
+/**
+ * javascript blocks
+ */
+
 'use strict';
 
 Blockly.JavaScript['data_to_number'] = function(block) {

@@ -30,9 +30,11 @@
             </a>
         </h1>
         <div id="header-right-btnGroup">
-            <i-button @click="generateAndRunCode" type="primary" shape="circle" icon="ios-play" title="直接生成并运行 JavaScript 代码"></i-button>
-            <i-button @click="generateCode">生成 JS 代码</i-button>
-            <i-button @click="downloadGenerateCode" type="primary">下载 JS 代码</i-button>
+            <i-button @click="generateAndRunCode" type="primary" shape="circle" icon="ios-play" title="直接生成并运行代码"></i-button>
+            <i-button @click="generateCode" title="生成当前工作空间代码" icon="ios-build"></i-button>
+            <i-button @click="downloadGenerateCode" title="下载当前工作空间代码" icon="ios-code-download"></i-button>
+            <i-button @click="toggleWorkspace" title="切换 HTML\JavaScript 工作空间" icon="ios-browsers"></i-button>
+            <i-button @click="toggleLiveBoard" title="显示\关闭实时预览面板" icon="ios-menu"></i-button>
         </div>
     </header>
 
@@ -45,15 +47,49 @@
             <br>
             <br>
             <br>
-            <i-button @click="clearWorkspace" id="clear-workspace-btn">清空工作空间</i-button>
+            <i-button @click="clearWorkspace" title="清理当前工作空间" id="clear-workspace-btn">清空工作空间</i-button>
             <modal v-model="clearModal" title="你确定要清空工作空间吗？" @on-ok="clearModalOk">
                 <p style="color: red">清空工作空间后将无法恢复！请谨慎操作！</p>
             </modal>
         </div>
 
         <div id="blockly-area"></div>
-        <div id="blockly-div"></div>
-        <xml id="toolbox">
+
+        <div id="blockly-html-div"></div>
+        <xml id="html-toolbox">
+            <category name="段落" colour="210">
+                <block type="html_text"></block>
+                <block type="html_p"></block>
+            </category>
+            <category name="标题" colour="180">
+                <block type="html_h1"></block>
+                <block type="html_h2"></block>
+                <block type="html_h3"></block>
+                <block type="html_h4"></block>
+                <block type="html_h5"></block>
+                <block type="html_h6"></block>
+            </category>
+            <category name="媒体" colour="80">
+                <block type="html_img"></block>
+                <block type="html_video"></block>
+                <block type="html_source"></block>
+            </category>
+            <category name="数据" colour="300">
+
+            </category>
+            <category name="样式" colour="240">
+
+            </category>
+            <category name="全局" colour="140">
+
+            </category>
+            <category name="属性" colour="40">
+                <block type="html_attr"></block>
+            </category>
+        </xml>
+
+        <div id="blockly-js-div"></div>
+        <xml id="js-toolbox">
             <category name="逻辑" colour="210">
                 <block type="logic_boolean"></block>
                 <block type="controls_if"></block>
@@ -143,17 +179,24 @@
             <category name="变量" colour="330" custom="VARIABLE"></category>
             <category name="函数" colour="290" custom="PROCEDURE"></category>
         </xml>
+
+        <div id="live-area" :style="styles">
+            <iframe :srcdoc="liveHTML"></iframe>
+        </div>
     </main>
 
     <script src="js/lib/vue.min.js"></script>
     <script src="js/lib/fileSaver.js"></script>
     <script src="//unpkg.com/view-design/dist/iview.min.js"></script>
     <script src="js/blockly/blockly_compressed.js"></script>
+    <script src="js/blockly/html.js"></script>
     <script src="js/blockly/javascript_compressed.js"></script>
+    <script src="js/blockly/generators/javascript/html.js"></script>
     <script src="js/blockly/generators/javascript/action.js"></script>
     <script src="js/blockly/generators/javascript/logic_new.js"></script>
     <script src="js/blockly/generators/javascript/data.js"></script>
     <script src="js/blockly/blocks_compressed.js"></script>
+    <script src="js/blockly/blocks/html.js"></script>
     <script src="js/blockly/blocks/action.js"></script>
     <script src="js/blockly/blocks/logic_new.js"></script>
     <script src="js/blockly/blocks/data.js"></script>

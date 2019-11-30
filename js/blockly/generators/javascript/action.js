@@ -1,3 +1,7 @@
+/**
+ * javascript blocks
+ */
+
 'use strict';
 
 Blockly.JavaScript['action_alert'] = function(block) {

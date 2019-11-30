@@ -1,3 +1,7 @@
+/**
+ * javascript blocks
+ */
+
 'use strict';
 
 Blockly.JavaScript['logic_interval'] = function(block) {

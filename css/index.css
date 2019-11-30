@@ -22,9 +22,17 @@ header h1 {
     font-weight: 200;
 }
 
+.ivu-modal-wrap {
+    z-index: 100000 !important;
+}
+
+.ivu-modal-confirm-body {
+    overflow: auto !important;
+}
+
 #header-right-btnGroup {
     height: 60px;
-    width: 300px;
+    width: 270px;
     position: absolute;
     right: 10px;
     top: 5px;
@@ -61,15 +69,35 @@ main {
 
 #blockly-area {
     position: absolute;
-    right: 0;
+    left: 150px;
     height: calc(100% - 60px);
     width: calc(100% - 150px);
 }
 
-#blockly-div {
+#blockly-html-div {
     position: absolute;
 }
 
-#toolbox {
+#blockly-js-div {
+    position: absolute;
     display: none;
+}
+
+#js-toolbox {
+    display: none;
+}
+
+#live-area {
+    height: calc(100% - 60px);
+    width: 350px;
+    box-sizing: border-box;
+    position: absolute;
+    right: 0;
+    border-top: 1px solid #e2e2e2;
+}
+
+#live-area iframe {
+    height: 100%;
+    width: 100%;
+    border: none;
 }
