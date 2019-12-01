@@ -208,6 +208,40 @@ Blockly.HTML['html_data_table_td'] = function(block) {
     return code;
 }
 
+Blockly.HTML['html_form'] = function(block) {
+    const text = Blockly.HTML.statementToCode(block, 'HTML'),
+        attr = Blockly.HTML.valueToCode(block, 'ATTR', Blockly.HTML.ORDER_ATOMIC),
+        code = '<form' + attr + '>' + text + '</form>';
+    return code;
+}
+
+Blockly.HTML['html_form_input'] = function(block) {
+    const attr = Blockly.HTML.valueToCode(block, 'ATTR', Blockly.HTML.ORDER_ATOMIC),
+        code = '<input' + attr + '>';
+    return code;
+}
+
+Blockly.HTML['html_form_select'] = function(block) {
+    const text = Blockly.HTML.statementToCode(block, 'HTML'),
+        attr = Blockly.HTML.valueToCode(block, 'ATTR', Blockly.HTML.ORDER_ATOMIC),
+        code = '<select' + attr + '>' + text + '</select>';
+    return code;
+}
+
+Blockly.HTML['html_form_option'] = function(block) {
+    const text = Blockly.HTML.statementToCode(block, 'HTML'),
+        attr = Blockly.HTML.valueToCode(block, 'ATTR', Blockly.HTML.ORDER_ATOMIC),
+        code = '<option' + attr + '>' + text + '</option>';
+    return code;
+}
+
+Blockly.HTML['html_form_text_area'] = function(block) {
+    const text = Blockly.HTML.statementToCode(block, 'HTML'),
+        attr = Blockly.HTML.valueToCode(block, 'ATTR', Blockly.HTML.ORDER_ATOMIC),
+        code = '<textarea' + attr + '>' + text + '</textarea>';
+    return code;
+}
+
 // generate h1 - h6
 for (let i = 1; i <= 6; i++) {
     Blockly.HTML['html_h' + i] = function(block) {

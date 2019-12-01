@@ -496,6 +496,98 @@ Blockly.Blocks['html_data_table_td'] = {
     }
 }
 
+Blockly.Blocks['html_form'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("表单")
+        this.appendValueInput("ATTR")
+            .setCheck("Attribute")
+            .appendField("属性");
+        this.appendStatementInput("HTML")
+            .setCheck(null)
+            .appendField("内部");
+        this.setInputsInline(true);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(270);
+        this.setTooltip('表单标记');
+        this.setHelpUrl('https://www.runoob.com/tags/tag-form.html');
+    }
+}
+
+Blockly.Blocks['html_form_input'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("输入")
+        this.appendValueInput("ATTR")
+            .setCheck("Attribute")
+            .appendField("属性");
+        this.setInputsInline(true);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(270);
+        this.setTooltip('表单输入标记');
+        this.setHelpUrl('https://www.runoob.com/tags/tag-input.html');
+    }
+}
+
+Blockly.Blocks['html_form_select'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("选择")
+        this.appendValueInput("ATTR")
+            .setCheck("Attribute")
+            .appendField("属性");
+        this.appendStatementInput("HTML")
+            .setCheck(null)
+            .appendField("内部");
+        this.setInputsInline(true);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(270);
+        this.setTooltip('选择标记');
+        this.setHelpUrl('https://www.runoob.com/tags/tag-select.html');
+    }
+}
+
+Blockly.Blocks['html_form_option'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("选择选项")
+        this.appendValueInput("ATTR")
+            .setCheck("Attribute")
+            .appendField("属性");
+        this.appendStatementInput("HTML")
+            .setCheck(null)
+            .appendField("内部");
+        this.setInputsInline(true);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(270);
+        this.setTooltip('选择选项标记');
+        this.setHelpUrl('https://www.runoob.com/tags/tag-option.html');
+    }
+}
+
+Blockly.Blocks['html_form_text_area'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("输入区域")
+        this.appendValueInput("ATTR")
+            .setCheck("Attribute")
+            .appendField("属性");
+        this.appendStatementInput("HTML")
+            .setCheck(null)
+            .appendField("内部");
+        this.setInputsInline(true);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(270);
+        this.setTooltip('输入区域标记');
+        this.setHelpUrl('https://www.runoob.com/tags/tag-textarea.html');
+    }
+}
+
 // generate h1 - h6
 for (let i = 1; i <= 6; i++) {
     Blockly.Blocks['html_h' + i] = {

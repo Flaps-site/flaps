@@ -44,9 +44,8 @@
                 <i-button icon="ios-cloud-upload-outline">导入块文件</i-button>
             </upload>
             <i-button style="margin-top: 4px;" icon="ios-cloud-download-outline" @click="exportBlockXMLFile">导出块文件</i-button>
-            <br>
-            <br>
-            <br>
+            <!-- TODO:  -->
+            <!-- <i-switch v-model="isOpen" @on-change="change"></i-switch> -->
             <i-button @click="clearWorkspace" title="清理当前工作空间" id="clear-workspace-btn">清空工作空间</i-button>
             <modal v-model="clearModal" title="你确定要清空工作空间吗？" @on-ok="clearModalOk">
                 <p style="color: red">清空工作空间后将无法恢复！请谨慎操作！</p>
@@ -85,7 +84,11 @@
                 <block type="html_source"></block>
             </category>
             <category name="表单" colour="270">
-
+                <block type="html_form"></block>
+                <block type="html_form_input"></block>
+                <block type="html_form_select"></block>
+                <block type="html_form_option"></block>
+                <block type="html_form_text_area"></block>
             </category>
             <category name="数据" colour="300">
                 <block type="html_data_ol"></block>
