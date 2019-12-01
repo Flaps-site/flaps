@@ -69,21 +69,43 @@
                 <block type="html_h5"></block>
                 <block type="html_h6"></block>
             </category>
+            <category name="全局" colour="140">
+                <block type="html_document"></block>
+                <block type="html_head"></block>
+                <block type="html_body"></block>
+                <block type="html_title"></block>
+                <block type="html_meta"></block>
+                <block type="html_link"></block>
+                <block type="html_script"></block>
+            </category>
             <category name="媒体" colour="80">
                 <block type="html_img"></block>
+                <block type="html_audio"></block>
                 <block type="html_video"></block>
                 <block type="html_source"></block>
             </category>
-            <category name="数据" colour="300">
+            <category name="表单" colour="270">
 
+            </category>
+            <category name="数据" colour="300">
+                <block type="html_data_ol"></block>
+                <block type="html_data_ul"></block>
+                <block type="html_data_list_item"></block>
+                <block type="html_data_table"></block>
+                <block type="html_data_table_title"></block>
+                <block type="html_data_table_thead"></block>
+                <block type="html_data_table_tbody"></block>
+                <block type="html_data_table_th"></block>
+                <block type="html_data_table_tr"></block>
+                <block type="html_data_table_td"></block>
             </category>
             <category name="样式" colour="240">
-
-            </category>
-            <category name="全局" colour="140">
-
+                <block type="html_style"></block>
+                <block type="html_style_sel"></block>
+                <block type="html_style_item"></block>
             </category>
             <category name="属性" colour="40">
+                <block type="html_attr_stat"></block>
                 <block type="html_attr"></block>
             </category>
         </xml>
@@ -107,12 +129,17 @@
                 <block type="action_alert"></block>
                 <block type="action_prompt"></block>
                 <block type="action_confirm"></block>
-                <block type="action_getStyle"></block>
-                <block type="action_getAttr"></block>
-                <block type="action_getInner"></block>
-                <block type="action_setStyle"></block>
-                <block type="action_setAttr"></block>
-                <block type="action_setInner"></block>
+                <block type="action_get_el"></block>
+                <block type="action_get_all_el"></block>
+                <block type="action_get_attr"></block>
+                <block type="action_set_attr"></block>
+                <block type="action_get_style"></block>
+                <block type="action_set_style"></block>
+                <block type="action_get_inner"></block>
+                <block type="action_set_inner"></block>
+                <block type="action_set_event"></block>
+                <block type="action_trigger_event"></block>
+                <block type="action_run_js_code"></block>
             </category>
             <category name="循环" colour="120">
                 <block type="controls_repeat_ext"></block>
@@ -191,7 +218,7 @@
     <script src="js/blockly/blockly_compressed.js"></script>
     <script src="js/blockly/html.js"></script>
     <script src="js/blockly/javascript_compressed.js"></script>
-    <script src="js/blockly/generators/javascript/html.js"></script>
+    <script src="js/blockly/generators/html/html.js"></script>
     <script src="js/blockly/generators/javascript/action.js"></script>
     <script src="js/blockly/generators/javascript/logic_new.js"></script>
     <script src="js/blockly/generators/javascript/data.js"></script>

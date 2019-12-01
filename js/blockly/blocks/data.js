@@ -82,7 +82,7 @@ Blockly.Blocks['data_object_add_member'] = {
             .appendField("值为");
         this.appendValueInput("OBJ")
             .setCheck('Object')
-            .appendField("添加到对象");
+            .appendField("添加\\更改到对象");
         this.setInputsInline(true);
         this.setColour(40);
         this.setPreviousStatement(true, null);

@@ -93,10 +93,21 @@
                     xml = Blockly.Xml.workspaceToDom(htmlWorkspace);
                 }
 
-                const xml_text = Blockly.Xml.domToText(xml),
-                    blob = new Blob([xml_text], {
-                        type: "text/plain;charset=utf-8"
+                const xml_text = Blockly.Xml.domToText(xml);
+
+                //is mobile
+                if (!isPC()) {
+                    this.$Modal.success({
+                        title: '成功生成 ' + nowWorkspace + '_export.flaps 文件',
+                        content: codeToText(xml_text),
+                        scrollable: true
                     });
+                    return;
+                }
+
+                const blob = new Blob([xml_text], {
+                    type: "text/plain;charset=utf-8"
+                });
 
                 saveAs(blob, nowWorkspace + '_export.flaps');
             },
@@ -142,6 +153,12 @@
                 });
             },
             downloadGenerateCode() {
+                //is mobile
+                if (!isPC()) {
+                    this.generateCode();
+                    return;
+                }
+
                 let code;
 
                 if (nowWorkspace === 'js') {
@@ -168,14 +185,10 @@
                     return;
                 }
 
-                try {
+                liveAreaVue.liveHTML = '';
+                Vue.nextTick(function() {
                     liveAreaVue.liveHTML = htmlCode + '<script>' + jsCode + '</script>';
-                } catch (e) {
-                    this.$Modal.error({
-                        title: '代码运行失败',
-                        content: '生成代码失败，报错：' + e
-                    });
-                }
+                })
             },
             toggleLiveBoard() {
                 if (liveAreaVue.styles.display === 'none') {
@@ -194,6 +207,11 @@
                     document.querySelector("#blockly-js-div").style.display = 'block';
                     document.querySelector("#html-toolbox").style.display = 'none';
                     document.querySelector("#js-toolbox").style.display = 'block';
+
+                    if (document.querySelector('.blocklyHtmlInput') !== null) {
+                        document.querySelector('.blocklyHtmlInput').remove();
+                    }
+
                     Blockly.svgResize(jsWorkspace);
                     nowWorkspace = 'js';
                     return;
@@ -203,6 +221,11 @@
                 document.querySelector("#blockly-js-div").style.display = 'none';
                 document.querySelector("#html-toolbox").style.display = 'block';
                 document.querySelector("#js-toolbox").style.display = 'none';
+
+                if (document.querySelector('.blocklyHtmlInput') !== null) {
+                    document.querySelector('.blocklyHtmlInput').remove();
+                }
+
                 Blockly.svgResize(htmlWorkspace);
                 nowWorkspace = 'html';
             }
