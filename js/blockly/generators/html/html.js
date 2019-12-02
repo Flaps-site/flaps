@@ -6,6 +6,11 @@ Blockly.HTML['html_text'] = function(block) {
     return code;
 }
 
+Blockly.HTML['html_text_value'] = function(block) {
+    const text = block.getFieldValue('TEXT').replace(/"/g, '');
+    return [text, Blockly.HTML.ORDER_ATOMIC];
+}
+
 Blockly.HTML['html_p'] = function(block) {
     const text = Blockly.HTML.statementToCode(block, 'HTML'),
         attr = Blockly.HTML.valueToCode(block, 'ATTR', Blockly.HTML.ORDER_ATOMIC),
@@ -87,6 +92,13 @@ Blockly.HTML['html_run_html'] = function(block) {
     return code;
 }
 
+Blockly.HTML['html_a'] = function(block) {
+    const text = Blockly.HTML.statementToCode(block, 'HTML'),
+        attr = Blockly.HTML.valueToCode(block, 'HREF', Blockly.HTML.ORDER_ATOMIC),
+        code = '<a href="' + attr + '">' + text + '</a>';
+    return code;
+}
+
 Blockly.HTML['html_img'] = function(block) {
     const attr = Blockly.HTML.valueToCode(block, 'ATTR', Blockly.HTML.ORDER_ATOMIC),
         code = '<img' + attr + '>';
@@ -122,8 +134,13 @@ Blockly.HTML['html_style'] = function(block) {
 Blockly.HTML['html_style_sel'] = function(block) {
     const style = Blockly.HTML.statementToCode(block, 'STYLE'),
         name = block.getFieldValue('NAME'),
-        sel = block.getFieldValue('SEL'),
-        code = sel + name + ' {' + style + '}';
+        sel = block.getFieldValue('SEL');
+
+    if (name.trim() === '') {
+        return '';
+    }
+
+    const code = sel + name + ' {' + style + '}';
     return code;
 }
 
@@ -161,6 +178,28 @@ Blockly.HTML['html_style_item'] = function(block) {
     }
 
     const code = name + ': ' + value + ';';
+
+    return code;
+}
+
+Blockly.HTML['html_style_color'] = function(block) {
+    const sel = block.getFieldValue('SEL'),
+        value = block.getFieldValue('VALUE');
+
+    if (value.trim() === '') {
+        return '';
+    }
+
+    const code = sel + ' { color: ' + value + '}';
+
+    return code;
+}
+
+Blockly.HTML['html_style_text_align'] = function(block) {
+    const sel = block.getFieldValue('SEL'),
+        value = block.getFieldValue('VALUE');
+
+    const code = sel + ' { text-align: ' + value + '}';
 
     return code;
 }

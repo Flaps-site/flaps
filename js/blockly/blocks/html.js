@@ -19,6 +19,24 @@ Blockly.Blocks['html_text'] = {
     }
 }
 
+Blockly.Blocks['html_text_value'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldImage("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAKCAQAAAAqJXdxAAAAn0lEQVQI1z3OMa5BURSF4f/cQhAKjUQhuQmFNwGJEUi0RKN5rU7FHKhpjEH3TEMtkdBSCY1EIv8r7nFX9e29V7EBAOvu7RPjwmWGH/VuF8CyN9/OAdvqIXYLvtRaNjx9mMTDyo+NjAN1HNcl9ZQ5oQMM3dgDUqDo1l8DzvwmtZN7mnD+PkmLa+4mhrxVA9fRowBWmVBhFy5gYEjKMfz9AylsaRRgGzvZAAAAAElFTkSuQmCC", 12, 12, {
+                alt: "*",
+                flipRtl: "FALSE"
+            }))
+            .appendField(new Blockly.FieldTextInput(""), "TEXT")
+            .appendField(new Blockly.FieldImage("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAKCAQAAAAqJXdxAAAAqUlEQVQI1z3KvUpCcRiA8ef9E4JNHhI0aFEacm1o0BsI0Slx8wa8gLauoDnoBhq7DcfWhggONDmJJgqCPA7neJ7p934EOOKOnM8Q7PDElo/4x4lFb2DmuUjcUzS3URnGib9qaPNbuXvBO3sGPHJDRG6fGVdMSeWDP2q99FQdFrz26Gu5Tq7dFMzUvbXy8KXeAj57cOklgA+u1B5AoslLtGIHQMaCVnwDnADZIFIrXsoXrgAAAABJRU5ErkJggg==", 12, 12, {
+                alt: "*",
+                flipRtl: "FALSE"
+            }));
+        this.setOutput(true, 'Text');
+        this.setColour(230);
+        this.setTooltip('文本（值）');
+    }
+}
+
 Blockly.Blocks['html_p'] = {
     init: function() {
         this.appendDummyInput()
@@ -198,6 +216,25 @@ Blockly.Blocks['html_run_html'] = {
     }
 }
 
+Blockly.Blocks['html_a'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("超链接")
+        this.appendValueInput("HREF")
+            .setCheck("Text")
+            .appendField("链接地址");
+        this.appendStatementInput("HTML")
+            .setCheck(null)
+            .appendField("内部");
+        this.setInputsInline(true);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(80);
+        this.setTooltip('链接标记');
+        this.setHelpUrl('https://www.runoob.com/tags/tag-a.html');
+    }
+}
+
 Blockly.Blocks['html_img'] = {
     init: function() {
         this.appendDummyInput()
@@ -315,6 +352,47 @@ Blockly.Blocks['html_style_item'] = {
         this.setNextStatement(true, null);
         this.setColour(240);
         this.setTooltip('给选择器添加一个样式。');
+    }
+}
+
+Blockly.Blocks['html_style_color'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("设置")
+            .appendField(new Blockly.FieldDropdown([
+                ["段落", "p"],
+                ["标题1", "h1"],
+                ["标题2", "h2"]
+            ]), "SEL")
+            .appendField("的颜色为")
+            .appendField(new Blockly.FieldTextInput(""), "VALUE");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(240);
+        this.setTooltip('设置段落的颜色。');
+    }
+}
+
+Blockly.Blocks['html_style_text_align'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("设置")
+            .appendField(new Blockly.FieldDropdown([
+                ["超链接", "a"],
+                ["段落", "p"],
+                ["标题1", "h1"],
+                ["标题2", "h2"]
+            ]), "SEL")
+            .appendField("的文本位置为")
+            .appendField(new Blockly.FieldDropdown([
+                ["左", "left"],
+                ["中", "center"],
+                ["右", "right"]
+            ]), "VALUE")
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(240);
+        this.setTooltip('设置段落的颜色。');
     }
 }
 
