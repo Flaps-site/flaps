@@ -81,6 +81,12 @@ Blockly.HTML['html_script'] = function(block) {
     return code;
 }
 
+Blockly.HTML['html_run_html'] = function(block) {
+    const html = block.getFieldValue('HTML'),
+        code = html;
+    return code;
+}
+
 Blockly.HTML['html_img'] = function(block) {
     const attr = Blockly.HTML.valueToCode(block, 'ATTR', Blockly.HTML.ORDER_ATOMIC),
         code = '<img' + attr + '>';

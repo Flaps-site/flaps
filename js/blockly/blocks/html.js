@@ -186,6 +186,18 @@ Blockly.Blocks['html_script'] = {
     }
 }
 
+Blockly.Blocks['html_run_html'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("HTML 代码")
+            .appendField(new Blockly.FieldMultilineInput(""), "HTML");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(140);
+        this.setTooltip('直接输入 HTML 代码。');
+    }
+}
+
 Blockly.Blocks['html_img'] = {
     init: function() {
         this.appendDummyInput()
