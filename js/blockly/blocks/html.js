@@ -220,9 +220,27 @@ Blockly.Blocks['html_a'] = {
     init: function() {
         this.appendDummyInput()
             .appendField("超链接")
-        this.appendValueInput("HREF")
-            .setCheck("Text")
-            .appendField("链接地址");
+        this.appendValueInput("ATTR")
+            .setCheck("Attribute")
+            .appendField("属性");
+        this.appendStatementInput("HTML")
+            .setCheck(null)
+            .appendField("内部");
+        this.setInputsInline(true);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(80);
+        this.setTooltip('链接标记');
+        this.setHelpUrl('https://www.runoob.com/tags/tag-a.html');
+    }
+}
+
+Blockly.Blocks['html_a_easy'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("超链接")
+            .appendField("链接地址")
+            .appendField(new Blockly.FieldTextInput(""), "ATTR")
         this.appendStatementInput("HTML")
             .setCheck(null)
             .appendField("内部");
@@ -315,7 +333,7 @@ Blockly.Blocks['html_style'] = {
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(240);
+        this.setColour(340);
         this.setTooltip('样式标记');
         this.setHelpUrl('https://www.runoob.com/tags/tag-style.html');
     }
@@ -336,7 +354,7 @@ Blockly.Blocks['html_style_sel'] = {
             .setCheck(null);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(240);
+        this.setColour(340);
         this.setTooltip('给样式元素添加一个选择器。');
     }
 }
@@ -350,7 +368,7 @@ Blockly.Blocks['html_style_item'] = {
             .appendField(new Blockly.FieldTextInput(""), "VALUE");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(240);
+        this.setColour(340);
         this.setTooltip('给选择器添加一个样式。');
     }
 }
@@ -368,7 +386,7 @@ Blockly.Blocks['html_style_color'] = {
             .appendField(new Blockly.FieldTextInput(""), "VALUE");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(240);
+        this.setColour(340);
         this.setTooltip('设置段落的颜色。');
     }
 }
@@ -391,7 +409,7 @@ Blockly.Blocks['html_style_text_align'] = {
             ]), "VALUE")
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(240);
+        this.setColour(340);
         this.setTooltip('设置段落的颜色。');
     }
 }

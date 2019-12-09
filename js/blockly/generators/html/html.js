@@ -94,7 +94,14 @@ Blockly.HTML['html_run_html'] = function(block) {
 
 Blockly.HTML['html_a'] = function(block) {
     const text = Blockly.HTML.statementToCode(block, 'HTML'),
-        attr = Blockly.HTML.valueToCode(block, 'HREF', Blockly.HTML.ORDER_ATOMIC),
+        attr = Blockly.HTML.valueToCode(block, 'ATTR', Blockly.HTML.ORDER_ATOMIC),
+        code = '<a' + attr + '>' + text + '</a>';
+    return code;
+}
+
+Blockly.HTML['html_a_easy'] = function(block) {
+    const text = Blockly.HTML.statementToCode(block, 'HTML'),
+        attr = block.getFieldValue('ATTR'),
         code = '<a href="' + attr + '">' + text + '</a>';
     return code;
 }
