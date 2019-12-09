@@ -198,13 +198,12 @@ Blockly.Blocks['html_run_html'] = {
     }
 }
 
-Blockly.Blocks['html_a'] = {
+Blockly.Blocks['html_a_easy'] = {
     init: function() {
         this.appendDummyInput()
             .appendField("超链接")
-        this.appendValueInput("ATTR")
-            .setCheck("Attribute")
-            .appendField("属性");
+            .appendField("链接地址")
+            .appendField(new Blockly.FieldTextInput(""), "ATTR")
         this.appendStatementInput("HTML")
             .setCheck(null)
             .appendField("内部");
@@ -217,12 +216,13 @@ Blockly.Blocks['html_a'] = {
     }
 }
 
-Blockly.Blocks['html_a_easy'] = {
+Blockly.Blocks['html_a'] = {
     init: function() {
         this.appendDummyInput()
             .appendField("超链接")
-            .appendField("链接地址")
-            .appendField(new Blockly.FieldTextInput(""), "ATTR")
+        this.appendValueInput("ATTR")
+            .setCheck("Attribute")
+            .appendField("属性");
         this.appendStatementInput("HTML")
             .setCheck(null)
             .appendField("内部");
