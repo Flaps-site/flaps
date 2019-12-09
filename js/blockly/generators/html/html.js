@@ -6,11 +6,6 @@ Blockly.HTML['html_text'] = function(block) {
     return code;
 }
 
-Blockly.HTML['html_text_value'] = function(block) {
-    const text = block.getFieldValue('TEXT').replace(/"/g, '');
-    return [text, Blockly.HTML.ORDER_ATOMIC];
-}
-
 Blockly.HTML['html_p'] = function(block) {
     const text = Blockly.HTML.statementToCode(block, 'HTML'),
         attr = Blockly.HTML.valueToCode(block, 'ATTR', Blockly.HTML.ORDER_ATOMIC),
