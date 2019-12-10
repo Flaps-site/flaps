@@ -1,17 +1,15 @@
 'use strict';
 
-Blockly.HTML['html_text'] = function(block) {
+Blockly.HTML['html_paragraph_text'] = function(block) {
     const text = block.getFieldValue('TEXT'),
         code = text;
     return code;
 }
 
-Blockly.HTML['html_p'] = function(block) {
-    const text = Blockly.HTML.statementToCode(block, 'HTML'),
-        attr = Blockly.HTML.valueToCode(block, 'ATTR', Blockly.HTML.ORDER_ATOMIC),
-        code = '<p' + attr + '>' + text + '</p>';
-    return code;
-}
+generateNormalBlockParser({
+    type: 'paragraph',
+    name: 'p'
+})
 
 Blockly.HTML['html_attr_stat'] = function(block) {
     const attr = Blockly.HTML.statementToCode(block, 'ATTR');
@@ -35,53 +33,33 @@ Blockly.HTML['html_attr'] = function(block) {
     return code;
 }
 
-Blockly.HTML['html_document'] = function(block) {
+const globalTagParsers = ['head', 'body', 'title', 'script'];
+for (let i = 0; i < globalTagParsers.length; i++) {
+    generateNormalBlockParser({
+        type: 'global',
+        name: globalTagParsers[i]
+    })
+}
+
+Blockly.HTML['html_global_document'] = function(block) {
     const text = Blockly.HTML.statementToCode(block, 'HTML'),
         code = '<html>' + text + '</html>';
     return code;
 }
 
-Blockly.HTML['html_head'] = function(block) {
-    const text = Blockly.HTML.statementToCode(block, 'HTML'),
-        attr = Blockly.HTML.valueToCode(block, 'ATTR', Blockly.HTML.ORDER_ATOMIC),
-        code = '<head' + attr + '>' + text + '</head>';
-    return code;
-}
-
-Blockly.HTML['html_body'] = function(block) {
-    const text = Blockly.HTML.statementToCode(block, 'HTML'),
-        attr = Blockly.HTML.valueToCode(block, 'ATTR', Blockly.HTML.ORDER_ATOMIC),
-        code = '<body' + attr + '>' + text + '</body>';
-    return code;
-}
-
-Blockly.HTML['html_title'] = function(block) {
-    const text = Blockly.HTML.statementToCode(block, 'HTML'),
-        attr = Blockly.HTML.valueToCode(block, 'ATTR', Blockly.HTML.ORDER_ATOMIC),
-        code = '<title' + attr + '>' + text + '</title>';
-    return code;
-}
-
-Blockly.HTML['html_meta'] = function(block) {
+Blockly.HTML['html_global_meta'] = function(block) {
     const attr = Blockly.HTML.valueToCode(block, 'ATTR', Blockly.HTML.ORDER_ATOMIC),
         code = '<meta' + attr + '>';
     return code;
 }
 
-Blockly.HTML['html_link'] = function(block) {
+Blockly.HTML['html_global_link'] = function(block) {
     const attr = Blockly.HTML.valueToCode(block, 'ATTR', Blockly.HTML.ORDER_ATOMIC),
         code = '<link' + attr + '>';
     return code;
 }
 
-Blockly.HTML['html_script'] = function(block) {
-    const text = Blockly.HTML.statementToCode(block, 'HTML'),
-        attr = Blockly.HTML.valueToCode(block, 'ATTR', Blockly.HTML.ORDER_ATOMIC),
-        code = '<script' + attr + '>' + text + '</script>';
-    return code;
-}
-
-Blockly.HTML['html_run_html'] = function(block) {
+Blockly.HTML['html_global_run_html'] = function(block) {
     const html = block.getFieldValue('HTML'),
         code = html;
     return code;
@@ -90,7 +68,7 @@ Blockly.HTML['html_run_html'] = function(block) {
 Blockly.HTML['html_a_easy'] = function(block) {
     const text = Blockly.HTML.statementToCode(block, 'HTML'),
         attr = block.getFieldValue('ATTR'),
-        code = '<a href="' + attr + '">' + text + '</a>';
+        code = '<a href="' + attr.replace(/"/g, '') + '">' + text + '</a>';
     return code;
 }
 
@@ -98,6 +76,12 @@ Blockly.HTML['html_a'] = function(block) {
     const text = Blockly.HTML.statementToCode(block, 'HTML'),
         attr = Blockly.HTML.valueToCode(block, 'ATTR', Blockly.HTML.ORDER_ATOMIC),
         code = '<a' + attr + '>' + text + '</a>';
+    return code;
+}
+
+Blockly.HTML['html_img_easy'] = function(block) {
+    const attr = block.getFieldValue('SRC'),
+        code = '<img src="' + attr.replace(/"/g, '') + '">';
     return code;
 }
 
@@ -291,10 +275,17 @@ Blockly.HTML['html_form_text_area'] = function(block) {
 
 // generate h1 - h6
 for (let i = 1; i <= 6; i++) {
-    Blockly.HTML['html_h' + i] = function(block) {
+    generateNormalBlockParser({
+        type: 'heading',
+        name: 'h' + i
+    })
+}
+
+function generateNormalBlockParser(cfg) {
+    Blockly.HTML['html_' + cfg.type + '_' + cfg.name] = function(block) {
         const text = Blockly.HTML.statementToCode(block, 'HTML'),
             attr = Blockly.HTML.valueToCode(block, 'ATTR', Blockly.HTML.ORDER_ATOMIC),
-            code = '<h' + i + attr + '>' + text + '</h' + i + '>';
+            code = '<' + cfg.name + attr + '>' + text + '</' + cfg.name + '>';
 
         return code;
     }

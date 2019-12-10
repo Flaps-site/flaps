@@ -1,6 +1,6 @@
 'use strict';
 
-Blockly.Blocks['html_text'] = {
+Blockly.Blocks['html_paragraph_text'] = {
     init: function() {
         this.appendDummyInput()
             .appendField(new Blockly.FieldImage("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAKCAQAAAAqJXdxAAAAn0lEQVQI1z3OMa5BURSF4f/cQhAKjUQhuQmFNwGJEUi0RKN5rU7FHKhpjEH3TEMtkdBSCY1EIv8r7nFX9e29V7EBAOvu7RPjwmWGH/VuF8CyN9/OAdvqIXYLvtRaNjx9mMTDyo+NjAN1HNcl9ZQ5oQMM3dgDUqDo1l8DzvwmtZN7mnD+PkmLa+4mhrxVA9fRowBWmVBhFy5gYEjKMfz9AylsaRRgGzvZAAAAAElFTkSuQmCC", 12, 12, {
@@ -19,24 +19,12 @@ Blockly.Blocks['html_text'] = {
     }
 }
 
-Blockly.Blocks['html_p'] = {
-    init: function() {
-        this.appendDummyInput()
-            .appendField("段落")
-        this.appendValueInput("ATTR")
-            .setCheck("Attribute")
-            .appendField("属性");
-        this.appendStatementInput("HTML")
-            .setCheck(null)
-            .appendField("内部");
-        this.setInputsInline(true);
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
-        this.setColour(230);
-        this.setTooltip('段落标记');
-        this.setHelpUrl('https://www.runoob.com/tags/tag-p.html');
-    }
-}
+generateNormalBlock({
+    type: 'paragraph',
+    name: 'p',
+    displayName: '段落',
+    color: 230
+})
 
 Blockly.Blocks['html_attr_stat'] = {
     init: function() {
@@ -65,7 +53,32 @@ Blockly.Blocks['html_attr'] = {
     }
 }
 
-Blockly.Blocks['html_document'] = {
+const globalTags = [{
+        name: 'head',
+        displayName: '页面头部'
+    },
+    {
+        name: 'body',
+        displayName: '页面内容'
+    },
+    {
+        name: 'title',
+        displayName: '页面标题'
+    },
+    {
+        name: 'script',
+        displayName: '外部脚本'
+    }
+]
+
+for (let i = 0; i < globalTags.length; i++) {
+    generateNormalBlock(Object.assign({
+        type: 'global',
+        color: 140
+    }, globalTags[i]))
+}
+
+Blockly.Blocks['html_global_document'] = {
     init: function() {
         this.appendDummyInput()
             .appendField("HTML 文档")
@@ -78,64 +91,7 @@ Blockly.Blocks['html_document'] = {
     }
 }
 
-Blockly.Blocks['html_head'] = {
-    init: function() {
-        this.appendDummyInput()
-            .appendField("页面头部")
-        this.appendValueInput("ATTR")
-            .setCheck("Attribute")
-            .appendField("属性");
-        this.appendStatementInput("HTML")
-            .setCheck(null)
-            .appendField("内部");
-        this.setInputsInline(true);
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
-        this.setColour(140);
-        this.setTooltip('Head 标记');
-        this.setHelpUrl('https://www.runoob.com/tags/tag-head.html');
-    }
-}
-
-Blockly.Blocks['html_body'] = {
-    init: function() {
-        this.appendDummyInput()
-            .appendField("页面内容")
-        this.appendValueInput("ATTR")
-            .setCheck("Attribute")
-            .appendField("属性");
-        this.appendStatementInput("HTML")
-            .setCheck(null)
-            .appendField("内部");
-        this.setInputsInline(true);
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
-        this.setColour(140);
-        this.setTooltip('Body 标记');
-        this.setHelpUrl('https://www.runoob.com/tags/tag-body.html');
-    }
-}
-
-Blockly.Blocks['html_title'] = {
-    init: function() {
-        this.appendDummyInput()
-            .appendField("页面标题")
-        this.appendValueInput("ATTR")
-            .setCheck("Attribute")
-            .appendField("属性");
-        this.appendStatementInput("HTML")
-            .setCheck(null)
-            .appendField("内部");
-        this.setInputsInline(true);
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
-        this.setColour(140);
-        this.setTooltip('页面标题标记');
-        this.setHelpUrl('https://www.runoob.com/tags/tag-title.html');
-    }
-}
-
-Blockly.Blocks['html_meta'] = {
+Blockly.Blocks['html_global_meta'] = {
     init: function() {
         this.appendDummyInput()
             .appendField("页面属性")
@@ -151,7 +107,7 @@ Blockly.Blocks['html_meta'] = {
     }
 }
 
-Blockly.Blocks['html_link'] = {
+Blockly.Blocks['html_global_link'] = {
     init: function() {
         this.appendDummyInput()
             .appendField("外部样式")
@@ -167,26 +123,7 @@ Blockly.Blocks['html_link'] = {
     }
 }
 
-Blockly.Blocks['html_script'] = {
-    init: function() {
-        this.appendDummyInput()
-            .appendField("外部脚本")
-        this.appendValueInput("ATTR")
-            .setCheck("Attribute")
-            .appendField("属性");
-        this.appendStatementInput("HTML")
-            .setCheck(null)
-            .appendField("内部");
-        this.setInputsInline(true);
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
-        this.setColour(140);
-        this.setTooltip('外部脚本文件标记');
-        this.setHelpUrl('https://www.runoob.com/tags/tag-script.html');
-    }
-}
-
-Blockly.Blocks['html_run_html'] = {
+Blockly.Blocks['html_global_run_html'] = {
     init: function() {
         this.appendDummyInput()
             .appendField("HTML 代码")
@@ -232,6 +169,21 @@ Blockly.Blocks['html_a'] = {
         this.setColour(80);
         this.setTooltip('链接标记');
         this.setHelpUrl('https://www.runoob.com/tags/tag-a.html');
+    }
+}
+
+Blockly.Blocks['html_img_easy'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("图片")
+            .appendField("资源地址")
+            .appendField(new Blockly.FieldTextInput(""), "SRC")
+        this.setInputsInline(true);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(80);
+        this.setTooltip('图片标记');
+        this.setHelpUrl('https://www.runoob.com/tags/tag-img.html');
     }
 }
 
@@ -680,10 +632,20 @@ Blockly.Blocks['html_form_text_area'] = {
 
 // generate h1 - h6
 for (let i = 1; i <= 6; i++) {
-    Blockly.Blocks['html_h' + i] = {
+    generateNormalBlock({
+        type: 'heading',
+        name: 'h' + i,
+        displayName: '标题' + i,
+        color: 180,
+        help: 'https://www.runoob.com/tags/tag-hn.html'
+    })
+}
+
+function generateNormalBlock(cfg) {
+    Blockly.Blocks['html_' + cfg.type + '_' + cfg.name] = {
         init: function() {
             this.appendDummyInput()
-                .appendField("标题" + i)
+                .appendField(cfg.displayName)
             this.appendValueInput("ATTR")
                 .setCheck("Attribute")
                 .appendField("属性");
@@ -693,9 +655,12 @@ for (let i = 1; i <= 6; i++) {
             this.setInputsInline(true);
             this.setPreviousStatement(true, null);
             this.setNextStatement(true, null);
-            this.setColour(180);
-            this.setTooltip('标题' + i + '标记');
-            this.setHelpUrl('https://www.runoob.com/tags/tag-hn.html');
+            this.setColour(cfg.color);
+            this.setTooltip(cfg.displayName + '标记');
+            if (!cfg.help) {
+                cfg.help = 'https://www.runoob.com/tags/tag-' + cfg.name + '.html'
+            }
+            this.setHelpUrl(cfg.help);
         }
     }
 }
