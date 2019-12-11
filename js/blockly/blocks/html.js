@@ -26,6 +26,18 @@ generateNormalBlock({
     color: 230
 })
 
+Blockly.Blocks['html_paragraph_br'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("换行");
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(230);
+        this.setTooltip('换行标记');
+        this.setHelpUrl('https://www.runoob.com/tags/tag-br.html');
+    }
+}
+
 Blockly.Blocks['html_attr_stat'] = {
     init: function() {
         this.appendDummyInput()

@@ -11,6 +11,10 @@ generateNormalBlockParser({
     name: 'p'
 })
 
+Blockly.HTML['html_paragraph_br'] = function(block) {
+    return '<br>';
+}
+
 Blockly.HTML['html_attr_stat'] = function(block) {
     const attr = Blockly.HTML.statementToCode(block, 'ATTR');
     return [attr, Blockly.HTML.ORDER_ATOMIC];
